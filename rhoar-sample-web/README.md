@@ -10,6 +10,9 @@ https://learn.openshift.com/middleware/rhoar-getting-started-spring/
 mvn spring-boot:run
 ```
 
+git status
+
+
 **Create project and app on OpenShift**
 
 ```bash
@@ -21,6 +24,8 @@ oc new-app -e POSTGRESQL_USER=luke -e POSTGRESQL_PASSWORD=secret -e POSTGRESQL_D
 ```
 
 **Deploy on OpenShift**
+
+Deploy on OCP will use the fabric8 maven plugin
 
 ```bash
 mvn package fabric8:deploy -Popenshift -DskipTests
