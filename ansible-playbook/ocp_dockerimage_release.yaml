@@ -1,5 +1,7 @@
-- name: Openshift docker image release 
+- name: Openshift docker image release
   hosts: localhost
+  become: false
+  gather_facts: no
   vars:
     master: "{{ openshift_master_url }}" #https://127.0.0.1:8443
     cli: "{{ openshift_cli_command }}" #oc
@@ -7,6 +9,7 @@
     password: "{{ openshift_password }}" #developer
     namespace: "{{ openshift_namespace }}" #test
     docker_image: "{{ openshift_docker_image }}" #mysql
+    tag: "{{ openshift_docker_image_tag}}" #1
     app: "{{ openshift_app }}" #apptest
     replicas: "{{ openshift_app_replicas }}" #2
   tasks:
@@ -32,8 +35,16 @@
       shell: "{{ cli }} delete route {{ app }}"
       ignore_errors: true
 
+    - name: Openshift delete imagestream
+      shell: "{{ cli }} delete imagestream {{ app }}"
+      ignore_errors: true
+
+    - name: Openshift import image route
+      shell: "{{ cli }} import-image {{ docker_image }}:{{ tag }} --insecure=true --confirm"
+      ignore_errors: true
+
     - name: Openshift new app
-      shell: "{{ cli }} new-app --docker-image={{ docker_image }} --name={{ app }}"
+      shell: "{{ cli }} new-app --image-stream {{ app }}:{{ tag }} --name={{ app }}"
 
     - name: Openshift scale app
       shell: "{{ cli }} scale --replicas={{ replicas }} dc {{ app }}"

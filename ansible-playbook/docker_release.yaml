@@ -1,0 +1,26 @@
+- name: Docker image release
+  hosts: localhost
+  become: false
+  gather_facts: no
+  vars:
+    registry: "{{ docker_registry }}" 
+    user: "{{ docker_user }}" #developer 
+    password: "{{ docker_password }}" #developer
+    image: "{{ docker_image }}" 
+    tag: "{{ docker_tag }}" #2
+    path: "{{ dockerfile}}" 
+  tasks:
+
+    - name: Log into private registry and force re-authorization
+      docker_login:
+         registry: "{{ registry }}"
+         username: "{{ docker_user }}" 
+         password: "{{ docker_password }}"
+         reauthorize: yes
+
+    - name: Build an image and push it to a private repo
+      docker_image:
+         path: "{{ dockerfile}}"
+         name: "{{ registry }}/{{ image }}"
+         tag: "{{ tag }}"
+         push: yes
