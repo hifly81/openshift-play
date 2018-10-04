@@ -4,12 +4,22 @@
   gather_facts: no
   vars:
     registry: "{{ docker_registry }}" 
-    user: "{{ docker_user }}" #developer 
-    password: "{{ docker_password }}" #developer
+    user: "{{ docker_user }}"
+    password: "{{ docker_password }}" 
     image: "{{ docker_image }}" 
-    tag: "{{ docker_tag }}" #2
-    path: "{{ dockerfile}}" 
+    tag: "{{ docker_tag }}"
+    path: "{{ dockerfile }}" 
+    githttpprotocol: "{{ githttpprotocol }}"
+    gituser: "{{ gituser }}" 
+    gitpassword: "{{ gitpassword }}" 
+    gitrepo: "{{ gitrepo }}" 
+    gitrepodestinationpath: "{{ gitrepodestinationpath }}"
   tasks:
+
+    - name: Get updated files from git repository 
+      git: 
+        repo: "{{ githttpprotocol }}://{{ gituser }}:{{ gitpassword }}@{{ gitrepo }}"
+        dest: "{{ gitrepodestinationpath }}"
 
     - name: Log into private registry and force re-authorization
       docker_login:
@@ -24,3 +34,8 @@
          name: "{{ registry }}/{{ image }}"
          tag: "{{ tag }}"
          push: yes
+
+
+
+
+

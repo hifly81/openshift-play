@@ -33,6 +33,11 @@ ansible-playbook \
 -e docker_image=<image_name> \
 -e docker_tag=<tag> \
 -e dockerfile=<Dockerfile location> \
+-e githttpprotocol=<git http/s protocol> \
+-e gituser=<git user> \
+-e gitpassword=<git password> \
+-e gitrepo=<git repository> \
+-e gitrepodestinationpath=<git repository> \
 -v docker_release.yaml.yaml
 ```
 
@@ -43,6 +48,11 @@ where:<br>
   * docker_image --> name of the docker image (e.g. test)
   * docker_tag --> tag of the docker image (e.g. 1)
   * dockerfile --> uri location of Dockerfile
+  * githttpprotocol --> git http/s protocol
+  * gituser --> git user
+  * gitpassword --> git password
+  * gitrepo --> git repository
+  * gitrepodestinationpath --> directory target where cloning the git repo
 
 
 ### Openshift Release
