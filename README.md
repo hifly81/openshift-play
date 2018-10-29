@@ -14,6 +14,13 @@
  <br>
  Sample web application with circuit breaker and hystrix dashboard - Spring Boot and RHOAR
 
+
+## Apache Camel microservices
+
+### camel-sample-service
+ Sample Apache Camel route in a spring boot microservice.
+
+
 ## Ansible Playbook
 
 
@@ -38,7 +45,7 @@ ansible-playbook \
 -e gitpassword=<git password> \
 -e gitrepo=<git repository> \
 -e gitrepodestinationpath=<git repository> \
--v docker_release.yaml.yaml
+-v docker_release.yaml
 ```
 
 where:<br>
