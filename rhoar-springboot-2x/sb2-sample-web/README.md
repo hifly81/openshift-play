@@ -2,7 +2,7 @@
 
 Example based on:
 
-https://access.redhat.com/documentation/en-us/red_hat_openshift_application_runtimes/1/html/spring_boot_1.5.x_runtime_guide/index
+https://access.redhat.com/documentation/en-us/red_hat_openshift_application_runtimes/1/html/spring_boot_2.1.x_runtime_guide/index
 
 **Test the application locally**
 
